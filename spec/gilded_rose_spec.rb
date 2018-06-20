@@ -36,8 +36,13 @@ describe GildedRose do
     end
 
     it "subtracts 1 from quality for normal items (not Aged Brie, etc)" do
-      items = [Item.new("foo", 0, 1)]
+      item1 = Item.new("foo", 8, 1)
+      item2 = Item.new("foo", 3, 1)
+      item3 = Item.new("foo", 0, 1)
+      items = [item1, item2, item3]
       GildedRose.new(items).update_quality()
+      expect(items[0].quality).to eq 0
+      expect(items[0].quality).to eq 0
       expect(items[0].quality).to eq 0
     end
 

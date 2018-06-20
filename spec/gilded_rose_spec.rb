@@ -16,8 +16,8 @@ describe GildedRose do
       item4 = Item.new("Backstage passes to a TAFKAL80ETC concert", 0, 0)
       items = [item1, item2, item3, item4]
       GildedRose.new(items).update_quality()
-      expect(items[0].quality).to be >= 0
-      expect(items[1].quality).to be >= 0
+      expect(items[0].quality).to eq 0
+      expect(items[1].quality).to eq 0
       expect(items[2].quality).to be >= 0
       expect(items[3].quality).to eq 0
     end

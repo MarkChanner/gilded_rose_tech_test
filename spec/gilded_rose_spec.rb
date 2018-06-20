@@ -37,7 +37,7 @@ describe GildedRose do
 
     it "never changes the quality of 'Sulfuras, Hand of Ragnaros'" do
       item0 = Item.new("Sulfuras, Hand of Ragnaros", 11, 5)
-      item1 = Item.new("Sulfuras, Hand of Ragnaros", 4, 5)
+      item1 = Item.new("Sulfuras, Hand of Ragnaros", 50, 5)
       item2 = Item.new("Sulfuras, Hand of Ragnaros", 0, 5)
       item3 = Item.new("Sulfuras, Hand of Ragnaros", -4, 5)
       items = [item0, item1, item2, item3]
@@ -88,6 +88,12 @@ describe GildedRose do
       expect(items[0].quality).to eq 3
     end
 
+    it "does not increment quality of 'Aged Brie' if quality == 50" do
+      items = [Item.new("Aged Brie", 1, 50)]
+      GildedRose.new(items).update_quality()
+      expect(items[0].quality).to eq 50
+    end
+
     it "adds 2 to quality if is 'Aged Brie' with sell_in value of zero or less" do
       items = [Item.new("Aged Brie", 0, 2)]
       GildedRose.new(items).update_quality()
@@ -120,6 +126,7 @@ describe GildedRose do
       expect(items[0].quality).to eq 0
       expect(items[1].quality).to eq 0
     end
+
   end
 
 end

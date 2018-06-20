@@ -22,8 +22,14 @@ describe GildedRose do
       expect(items[3].quality).to eq 0
     end
 
-    it "subtracts 1 from quality from normal items (not Aged Brie, etc)" do
+    it "subtracts 1 from quality for normal items (not Aged Brie, etc)" do
       items = [Item.new("foo", 0, 1)]
+      GildedRose.new(items).update_quality()
+      expect(items[0].quality).to eq 0
+    end
+
+    it "subtracts 2 from quality for normal items when sell by date passed" do
+      items = [Item.new("foo", -1, 2)]
       GildedRose.new(items).update_quality()
       expect(items[0].quality).to eq 0
     end

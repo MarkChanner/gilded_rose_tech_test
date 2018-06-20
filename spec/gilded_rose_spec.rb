@@ -46,14 +46,31 @@ describe GildedRose do
       expect(items[0].quality).to eq 0
     end
 
-    it "subtracts 2 from quality for normal items when sell by date passed" do
+    it "does not subtract from quality for normal items if quality == 0" do
+      item1 = Item.new("foo", 8, 0)
+      item2 = Item.new("foo", 3, 0)
+      item3 = Item.new("foo", -1, 0)
+      items = [item1, item2, item3]
+      GildedRose.new(items).update_quality()
+      expect(items[0].quality).to eq 0
+      expect(items[0].quality).to eq 0
+      expect(items[0].quality).to eq 0
+    end
+
+    it "subtracts 2 from quality for normal items when sell_in passed" do
       items = [Item.new("foo", -1, 2)]
       GildedRose.new(items).update_quality()
       expect(items[0].quality).to eq 0
     end
 
-    it "adds 1 to quality if name is 'Aged Brie'" do
-      items = [Item.new("Aged Brie", 4, 2)]
+    it "only subtracts 1 from quality for normal items when sell_in passed if quality == 1" do
+      items = [Item.new("foo", -1, 1)]
+      GildedRose.new(items).update_quality()
+      expect(items[0].quality).to eq 0
+    end
+
+    it "adds 1 to quality if name is 'Aged Brie' with sell_in value of > 0" do
+      items = [Item.new("Aged Brie", 1, 2)]
       GildedRose.new(items).update_quality()
       expect(items[0].quality).to eq 3
     end

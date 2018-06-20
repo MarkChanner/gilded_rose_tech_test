@@ -147,7 +147,7 @@ describe GildedRose do
 
     it "sets quality to 0 if is 'Backstage passes..' with <= 0 sell_in" do
       item0 = Item.new("Backstage passes to a TAFKAL80ETC concert", 0, 2)
-      item1 = Item.new("Backstage passes to a TAFKAL80ETC concert", -1, 2)
+      item1 = Item.new("Backstage passes to a TAFKAL80ETC concert", -1, 50)
       items = [item0, item1]
       GildedRose.new(items).update_quality()
       expect(items[0].quality).to eq 0

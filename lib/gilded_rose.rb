@@ -13,10 +13,9 @@ class GildedRose
   private
   def update(item)
     return if item.name == "Sulfuras, Hand of Ragnaros"
+
     if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
-      if item.quality > 0
-        item.quality -= 1
-      end
+      update_normal(item)
     else
       if item.quality < 50
         item.quality += 1
@@ -33,9 +32,8 @@ class GildedRose
           end
         end
       end
+      item.sell_in -= 1
     end
-
-    item.sell_in -= 1
 
     if item.sell_in < 0
       if item.name != "Aged Brie"
@@ -52,6 +50,17 @@ class GildedRose
         end
       end
     end
+  end
 
+  def update_normal(item)
+    if item.quality > 0
+      item.quality -= 1
+    end
+    item.sell_in -= 1
+    if item.sell_in < 0
+      if item.quality > 0
+        item.quality -= 1
+      end
+    end
   end
 end

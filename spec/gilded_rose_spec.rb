@@ -26,13 +26,13 @@ describe GildedRose do
       item1 = Item.new("foo", 0, 0)
       item2 = Item.new("Sulfuras, Hand of Ragnaros", 0, 0)
       item3 = Item.new("Aged Brie", 0, 0)
-      item4 = Item.new("Backstage passes to a TAFKAL80ETC concert", 0, 0)
+      item4 = Item.new("Backstage passes to a TAFKAL80ETC concert", 1, 0)
       items = [item1, item2, item3, item4]
       GildedRose.new(items).update_quality()
       expect(items[0].quality).to eq 0
       expect(items[1].quality).to eq 0
       expect(items[2].quality).to be >= 0
-      expect(items[3].quality).to eq 0
+      expect(items[3].quality).to be >= 0
     end
 
     it "subtracts 1 from quality for normal items (not Aged Brie, etc)" do
@@ -75,6 +75,15 @@ describe GildedRose do
       GildedRose.new(items).update_quality()
       expect(items[0].quality).to eq 5
       expect(items[1].quality).to eq 5
+    end
+
+    it "sets quality to 0 if is 'Backstage passes..' with <= 0 sell_in" do
+      item1 = Item.new("Backstage passes to a TAFKAL80ETC concert", 0, 2)
+      item2 = Item.new("Backstage passes to a TAFKAL80ETC concert", -1, 2)
+      items = [item1, item2]
+      GildedRose.new(items).update_quality()
+      expect(items[0].quality).to eq 0
+      expect(items[1].quality).to eq 0
     end
   end
 

@@ -22,7 +22,7 @@ describe GildedRose do
       expect(items[3].sell_in).to eq -1
     end
 
-    it "does not change the quality of an item to below zero" do
+    it "does not change the quality of any item to below zero" do
       item1 = Item.new("foo", 0, 0)
       item2 = Item.new("Sulfuras, Hand of Ragnaros", 0, 0)
       item3 = Item.new("Aged Brie", 0, 0)

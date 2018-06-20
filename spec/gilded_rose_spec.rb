@@ -82,7 +82,7 @@ describe GildedRose do
       expect(items[0].quality).to eq 0
     end
 
-    it "adds 1 to quality if name is 'Aged Brie' with sell_in value of > 0" do
+    it "adds just 1 to quality if name is 'Aged Brie' with sell_in value of > 0" do
       items = [Item.new("Aged Brie", 1, 2)]
       GildedRose.new(items).update_quality()
       expect(items[0].quality).to eq 3
@@ -104,6 +104,12 @@ describe GildedRose do
       items = [Item.new("Aged Brie", 0, 49)]
       GildedRose.new(items).update_quality()
       expect(items[0].quality).to eq 50
+    end
+
+    it "adds just 1 to quality if is 'Backstage passes..' with > 10 sell_in" do
+      items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 11, 2)]
+      GildedRose.new(items).update_quality()
+      expect(items[0].quality).to eq 3
     end
 
     it "adds 2 to quality if is 'Backstage passes..' with > 5 and <= 10 sell_in" do

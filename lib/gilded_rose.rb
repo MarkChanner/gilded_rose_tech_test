@@ -16,6 +16,7 @@ class GildedRose
     when "Sulfuras, Hand of Ragnaros" then return
     when "Aged Brie" then update_brie(item)
     when "Backstage passes to a TAFKAL80ETC concert" then update_backstage(item)
+    when "Conjured" then update_conjured(item)
     else update_normal(item)
     end
   end
@@ -32,6 +33,11 @@ class GildedRose
     increment_quality(item) if item.sell_in < 6
     item.sell_in -= 1
     item.quality = 0 if item.sell_in < 0
+  end
+
+  def update_conjured(item)
+    update_normal(item)
+    update_normal(item)
   end
 
   def update_normal(item)

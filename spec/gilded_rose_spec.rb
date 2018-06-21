@@ -197,6 +197,14 @@ describe GildedRose do
       end
     end
 
+    describe "on Conjured items" do
+      it "degrades in Quality twice as fast as normal items" do
+        items = [Item.new("Conjured", 5, 4)]
+        GildedRose.new(items).update_quality()
+        expect(items[0].quality).to eq 2
+      end
+    end
+
     it "does not change the quality of any item to below zero" do
       item0 = Item.new("foo", 0, 0)
       item1 = Item.new("Sulfuras, Hand of Ragnaros", 0, 0)

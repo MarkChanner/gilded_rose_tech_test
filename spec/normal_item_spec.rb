@@ -2,7 +2,6 @@ require 'item'
 require 'normal_item'
 
 describe NormalItem do
-  let(:normal_item) { NormalItem.new("foo", 0, 0) }
 
   describe "#update" do
       it "does not change the name" do

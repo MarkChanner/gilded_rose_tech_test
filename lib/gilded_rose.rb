@@ -13,14 +13,12 @@ class GildedRose
   private
   def update(item)
     return if item.name == "Sulfuras, Hand of Ragnaros"
-    if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
-      update_normal(item)
-    end
     if item.name == "Aged Brie"
       update_brie(item)
-    end
-    if item.name == "Backstage passes to a TAFKAL80ETC concert"
+    elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
       update_backstage(item)
+    else
+      update_normal(item)
     end
   end
 
@@ -31,25 +29,17 @@ class GildedRose
   end
 
   def update_brie(item)
-    item.quality += 1 if item.quality < 50
+    increment_quality(item)
     item.sell_in -= 1
-    if item.sell_in < 0
-      item.quality += 1 if item.quality < 50
-    end
+    increment_quality(item) if item.sell_in < 0
   end
 
   def update_backstage(item)
     increment_quality(item)
-    if item.sell_in < 11
-      increment_quality(item)
-    end
-    if item.sell_in < 6
-      increment_quality(item)
-    end
+    increment_quality(item) if item.sell_in < 11
+    increment_quality(item) if item.sell_in < 6
     item.sell_in -= 1
-    if item.sell_in < 0
-      item.quality = 0
-    end
+    item.quality = 0 if item.sell_in < 0
   end
 
   def decrement_quality(item)

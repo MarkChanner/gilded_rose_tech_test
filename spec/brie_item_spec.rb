@@ -2,7 +2,6 @@ require 'item'
 require 'brie_item'
 
 describe BrieItem do
-  let(:brie_item) { BrieItem.new("Aged Brie", 0, 0) }
 
   describe "#update" do
     it "adds just 1 to quality if sell_in value is > 0" do

@@ -40,5 +40,10 @@ describe BrieItem do
       expect(items[2].sell_in).to eq -1
       expect(items[3].sell_in).to eq -11
     end
+
+    it "does not change the quality to below zero" do
+      item = BackstagePassItem.new("Backstage passes to a TAFKAL80ETC concert", 1, 0)
+      expect(item.quality).to eq 0
+    end
   end
 end

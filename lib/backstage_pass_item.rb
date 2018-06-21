@@ -8,10 +8,7 @@ class BackstagePassItem < Item
     @quality = 0 if @sell_in < 0
   end
 
-  def decrement_quality
-    @quality -= 1 if @quality > 0
-  end
-
+  private
   def increment_quality
     @quality += 1 if @quality < 50
   end

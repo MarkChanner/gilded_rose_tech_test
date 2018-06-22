@@ -8,12 +8,16 @@ class ConjuredItem < Item
   private
   def update_once
     decrement_quality
-    @sell_in -= 1
+    decrement_sell_in
     decrement_quality if @sell_in < 0
   end
 
   def decrement_quality
     @quality -= 1 if @quality > 0
   end
-  
+
+  def decrement_sell_in
+    @sell_in -= 1
+  end
+
 end

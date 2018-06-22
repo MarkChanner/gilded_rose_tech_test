@@ -21,7 +21,11 @@ Feel free to make any changes to the _update_quality_ method and add any new cod
 
 Refactor the code in such a way that adding the new "conjured" functionality is easy.
 
-## Running the Program
+## Approach Used to refactor the code
+
+A thorough battery of tests that covered all edge-cases was prioritised. Once the tests were in place, the code for each item was carefully extracted out into individual methods. Once this was done, it became apparent that _item_ subclasses could be created that would each perform the necessary changes to its _quality_ and _sell_in_ variables with an _update_ method. This would allow the GildedRose class to simply call _update_ on each of the items in its array. An advantage of this approach is that, when it becomes necessary to add another item, the GildedRose class would not need to be changed, keeping it 'open to extension, but closed to modification'.
+
+## Running the Program with IRB
 
 Require the files:
 
